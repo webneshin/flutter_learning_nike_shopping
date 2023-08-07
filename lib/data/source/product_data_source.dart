@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_learning_nike_shopping/common/exception.dart';
+import 'package:flutter_learning_nike_shopping/data/common/http_data_validator.dart';
 import 'package:flutter_learning_nike_shopping/data/product.dart';
 
 abstract class IProductDataSource{
@@ -7,7 +7,7 @@ abstract class IProductDataSource{
   Future<List<Product>> search(String searchTerm);
 }
 
-class ProductRemoteDataSource implements IProductDataSource{
+class ProductRemoteDataSource with HttpResponseValidatorMixin implements IProductDataSource{
   final Dio httpClient;
 
   ProductRemoteDataSource(this.httpClient);
@@ -16,7 +16,8 @@ class ProductRemoteDataSource implements IProductDataSource{
   Future<List<Product>> getAll(int sort) async {
     final response = await httpClient.get('product/list?sort=$sort');
     validateResponse(response);
-    final products = <Product>[];
+    // final products = <Product>[];
+    final List<Product> products = [];
     (response.data as List).forEach((element) {
       products.add(Product.fromJson(element));
     });
@@ -33,12 +34,4 @@ class ProductRemoteDataSource implements IProductDataSource{
     });
     return products;
   }
-
-  validateResponse(Response response){
-    if (response.statusCode!=200){
-      throw AppException();
-    }
-
-  }
-
 }

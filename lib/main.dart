@@ -1,5 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learning_nike_shopping/data/product.dart';
+import 'package:flutter_learning_nike_shopping/data/repo/banner_repository.dart';
 import 'package:flutter_learning_nike_shopping/data/repo/product_repository.dart';
 import 'package:flutter_learning_nike_shopping/theme.dart';
 
@@ -29,11 +31,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // test repository services
+    productRepository.getAll(ProductSort.latest).then((value) {
+      value.forEach((element) {
+        print("${element.title} ::: ${element.price}");
+      });
+      print(value.length);
+    });
     productRepository.search("پیاده").then((value) {
       value.forEach((element) {
         print("${element.title} ::: ${element.price}");
       });
       print(value.length);
+    });
+    bannerRepository.getAll().then((value) {
+      value.forEach((element) { 
+        print(element.imageUrl);
+      });
     });
     return Scaffold(
       appBar: AppBar(
