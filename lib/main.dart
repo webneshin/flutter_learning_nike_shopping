@@ -31,6 +31,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("فروشگاه نایک"),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.light_mode)),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -46,7 +49,10 @@ class HomeScreen extends StatelessWidget {
             Text(
               'سلام سلام جهان من!',
             ),
-            TextButton(onPressed: () {}, child: Text("ثبت سفارش"))
+            TextButton(onPressed: () {}, child: Text("ثبت سفارش")),
+            FilledButton(onPressed: () {
+              
+            }, child: Text("دکمه"))
           ],
         ),
       ),
