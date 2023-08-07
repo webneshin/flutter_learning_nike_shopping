@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learning_nike_shopping/data/repo/product_ropository.dart';
 import 'package:flutter_learning_nike_shopping/theme.dart';
 
 void main() {
@@ -28,6 +29,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    productRepository.search("پیاده").then((value) {
+      value.forEach((element) {
+        print("${element.title} ::: ${element.price}");
+      });
+      print(value.length);
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("فروشگاه نایک"),
