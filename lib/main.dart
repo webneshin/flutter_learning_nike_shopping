@@ -9,18 +9,13 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
-    const FlexScheme colorFlexScheme = FlexScheme.sanJuanBlue;
+    var webneshinTheme = WebneshinTheme();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: FlexThemeData.light(
-        scheme: colorFlexScheme,
-        fontFamily: 'yekan',
-      ),
-      // darkTheme: darkTheme,
+      theme: webneshinTheme.light(),
+      darkTheme: webneshinTheme.dark(),
       themeMode: ThemeMode.light,
       home: const Directionality(
           textDirection: TextDirection.rtl, child: HomeScreen()),
