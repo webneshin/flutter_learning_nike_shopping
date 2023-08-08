@@ -1,13 +1,11 @@
-import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning_nike_shopping/common/exception.dart';
 import 'package:flutter_learning_nike_shopping/data/banner.dart';
 import 'package:flutter_learning_nike_shopping/data/product.dart';
 import 'package:flutter_learning_nike_shopping/data/repo/banner_repository.dart';
 import 'package:flutter_learning_nike_shopping/data/repo/product_repository.dart';
-import 'package:flutter_learning_nike_shopping/data/source/product_data_source.dart';
 
 part 'home_event.dart';
 

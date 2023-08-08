@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning_nike_shopping/data/repo/banner_repository.dart';
@@ -27,7 +26,7 @@ class HomeScreen extends StatelessWidget {
               if (state is HomeStateSuccess) {
                 return ListView.builder(
                   itemCount: 5,
-                  padding: EdgeInsets.fromLTRB(12, 12, 12, 100),
+                  padding: const EdgeInsets.fromLTRB(12, 12, 12, 100),
                   itemBuilder: (context, index) {
                     switch (index) {
                       case 0:
@@ -41,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 );
               } else if (state is HomeStateLoading) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (state is HomeStateError) {
                 return Center(
                     child: Column(
@@ -54,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(onPressed: () {
                       BlocProvider.of<HomeBloc>(context).add(HomeEventRefresh());
-                    }, child: Text('تلاش مجدد'))
+                    }, child: const Text('تلاش مجدد'))
                   ],
                 ));
               } else {
