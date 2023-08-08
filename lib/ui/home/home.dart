@@ -1,9 +1,14 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_learning_nike_shopping/data/banner.dart';
 import 'package:flutter_learning_nike_shopping/data/repo/banner_repository.dart';
 import 'package:flutter_learning_nike_shopping/data/repo/product_repository.dart';
 import 'package:flutter_learning_nike_shopping/generated/assets.dart';
 import 'package:flutter_learning_nike_shopping/ui/home/home_bloc.dart';
+import 'package:flutter_learning_nike_shopping/ui/widgets/image.dart';
+import 'package:flutter_learning_nike_shopping/ui/widgets/slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,6 +24,7 @@ class HomeScreen extends StatelessWidget {
         return homeBloc;
       },
       child: Scaffold(
+        // backgroundColor: Colors.grey,
         // appBar: AppBar(),
         body: SafeArea(
           child: BlocBuilder<HomeBloc, HomeState>(
@@ -26,11 +32,21 @@ class HomeScreen extends StatelessWidget {
               if (state is HomeStateSuccess) {
                 return ListView.builder(
                   itemCount: 5,
-                  padding: const EdgeInsets.fromLTRB(12, 12, 12, 100),
+                  // padding: const EdgeInsets.fromLTRB(12, 12, 12, 100),
                   itemBuilder: (context, index) {
                     switch (index) {
                       case 0:
-                        return Image.asset(Assets.imgNikeLogo);
+                        return Container(
+                          height: 56,
+                          alignment: Alignment.center,
+
+                          child: Image.asset(
+                            Assets.imgNikeLogo,height: 24,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        );
+                      case 2:
+                        return BannerSliderShow(banners: state.banners,);
                       default:
                         return Container(
                           color: Colors.green,
@@ -51,9 +67,12 @@ class HomeScreen extends StatelessWidget {
                       style:
                           TextStyle(color: Theme.of(context).colorScheme.error),
                     ),
-                    ElevatedButton(onPressed: () {
-                      BlocProvider.of<HomeBloc>(context).add(HomeEventRefresh());
-                    }, child: const Text('تلاش مجدد'))
+                    ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<HomeBloc>(context)
+                              .add(HomeEventRefresh());
+                        },
+                        child: const Text('تلاش مجدد'))
                   ],
                 ));
               } else {
@@ -66,3 +85,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+

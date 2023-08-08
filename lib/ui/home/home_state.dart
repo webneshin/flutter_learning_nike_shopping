@@ -28,7 +28,7 @@ class HomeStateError extends HomeState {
 class HomeStateSuccess extends HomeState {
   final List<Product> latestProducts;
   final List<Product> popularProducts;
-  final List<Banner> banners;
+  final List<BannerSlider> banners;
 
   const HomeStateSuccess(
       {required this.latestProducts,

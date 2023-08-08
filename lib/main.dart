@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_nike_shopping/theme.dart';
 import 'package:flutter_learning_nike_shopping/ui/home/home.dart';
@@ -17,8 +18,19 @@ class MainApp extends StatelessWidget {
       theme: webneshinTheme.light(),
       darkTheme: webneshinTheme.dark(),
       themeMode: ThemeMode.light,
+      scrollBehavior: MyCustomScrollBehavior(),
       home: const Directionality(
           textDirection: TextDirection.rtl, child: HomeScreen()),
     );
   }
+}
+
+
+// Enable scrolling with mouse dragging
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }
