@@ -7,6 +7,7 @@ import 'package:flutter_learning_nike_shopping/data/repo/banner_repository.dart'
 import 'package:flutter_learning_nike_shopping/data/repo/product_repository.dart';
 import 'package:flutter_learning_nike_shopping/generated/assets.dart';
 import 'package:flutter_learning_nike_shopping/ui/home/home_bloc.dart';
+import 'package:flutter_learning_nike_shopping/ui/product/product.dart';
 import 'package:flutter_learning_nike_shopping/ui/widgets/image.dart';
 import 'package:flutter_learning_nike_shopping/ui/widgets/slider.dart';
 
@@ -31,6 +32,7 @@ class HomeScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is HomeStateSuccess) {
                 return ListView.builder(
+                  physics: defaultScrollPhysics,
                   itemCount: 5,
                   // padding: const EdgeInsets.fromLTRB(12, 12, 12, 100),
                   itemBuilder: (context, index) {
@@ -139,56 +141,7 @@ class _HorizontalProductList extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8, right: 8),
             itemBuilder: (BuildContext context, int index) {
               final product = products[index];
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: SizedBox(
-                  width: 176,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: [
-                          SizedBox(
-                            width: 176,
-                            height: 189,
-                            child: ImageLoadingService(
-                              imageUrl: product.imageUrl,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border,
-                            ),
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            iconSize: 20,
-                            splashRadius: 1,
-                            tooltip: 'علاقه مندی',
-
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Tooltip(message: product.title, child: Text(product.title,overflow: TextOverflow.ellipsis ,maxLines: 1,)),
-                      ),
-                      SizedBox(height: 8),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8,left: 8),
-                        child: Text(product.previousPrice.withPriceLable,style: Theme.of(context).textTheme.bodySmall?.copyWith(decoration: TextDecoration.lineThrough),),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8,left: 8,top: 4),
-                        child: Text(product.price.withPriceLable),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return ProductItem(product: product,borderRadius: BorderRadius.circular(12),);
             },
           ),
         )
@@ -196,3 +149,4 @@ class _HorizontalProductList extends StatelessWidget {
     );
   }
 }
+
