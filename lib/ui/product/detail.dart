@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_nike_shopping/common/utils.dart';
 import 'package:flutter_learning_nike_shopping/data/product.dart';
+import 'package:flutter_learning_nike_shopping/ui/product/comment/comment_list.dart';
 import 'package:flutter_learning_nike_shopping/ui/widgets/image.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -22,6 +23,7 @@ class ProductDetailScreen extends StatelessWidget {
           physics: defaultScrollPhysics,
           slivers: [
             SliverAppBar(
+              pinned: true,
               expandedHeight: MediaQuery.of(context).size.width * 0.8,
               flexibleSpace: ImageLoadingService(
                 imageUrl: product.imageUrl,
@@ -79,14 +81,11 @@ class ProductDetailScreen extends StatelessWidget {
                       TextButton(onPressed: () {}, child: Text('ثبت نظر'))
                     ],
                   ),
-                  Container(
-                    color: Colors.deepOrange,
-                    width: MediaQuery.of(context).size.width-20,
-                    height: 1000,
-                  )
                 ],
               ),
-            )),
+            ),
+            ),
+            CommentList(productId: product.id)
           ],
         ),
       ),

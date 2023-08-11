@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_learning_nike_shopping/common/exception.dart';
 import 'package:flutter_learning_nike_shopping/common/utils.dart';
 import 'package:flutter_learning_nike_shopping/data/banner.dart';
 import 'package:flutter_learning_nike_shopping/data/product.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_learning_nike_shopping/data/repo/product_repository.dart
 import 'package:flutter_learning_nike_shopping/generated/assets.dart';
 import 'package:flutter_learning_nike_shopping/ui/home/home_bloc.dart';
 import 'package:flutter_learning_nike_shopping/ui/product/product.dart';
+import 'package:flutter_learning_nike_shopping/ui/widgets/error.dart';
 import 'package:flutter_learning_nike_shopping/ui/widgets/image.dart';
 import 'package:flutter_learning_nike_shopping/ui/widgets/slider.dart';
 
@@ -78,23 +80,10 @@ class HomeScreen extends StatelessWidget {
               } else if (state is HomeStateLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is HomeStateError) {
-                return Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      state.exception.message,
-                      style:
-                          TextStyle(color: Theme.of(context).colorScheme.error),
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          BlocProvider.of<HomeBloc>(context)
-                              .add(HomeEventRefresh());
-                        },
-                        child: const Text('تلاش مجدد'))
-                  ],
-                ));
+                return AppErrorWidget(exception: state.exception, onPressed: () {
+                  BlocProvider.of<HomeBloc>(context)
+                      .add(HomeEventRefresh());
+                },);
               } else {
                 throw Exception('State is not Supported');
               }
@@ -105,6 +94,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
 class _HorizontalProductList extends StatelessWidget {
   final String title;
