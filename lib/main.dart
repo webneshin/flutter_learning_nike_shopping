@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_nike_shopping/theme.dart';
 import 'package:flutter_learning_nike_shopping/ui/home/home.dart';
+import 'package:flutter_learning_nike_shopping/ui/root.dart';
 
 void main() {
   runApp(const MainApp());
@@ -20,7 +21,7 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       scrollBehavior: MyCustomScrollBehavior(),
       home: const Directionality(
-          textDirection: TextDirection.rtl, child: HomeScreen()),
+          textDirection: TextDirection.rtl, child: RootScreen()),
     );
   }
 }
