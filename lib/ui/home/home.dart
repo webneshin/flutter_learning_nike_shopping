@@ -45,6 +45,7 @@ class HomeScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Image.asset(
                             Assets.imgNikeLogo,
+                            color: Theme.of(context).colorScheme.surfaceTint,
                             height: 24,
                             fit: BoxFit.fitHeight,
                           ),
@@ -67,11 +68,11 @@ class HomeScreen extends StatelessWidget {
                         );
                       default:
                         return Container(
-                          color: Theme.of(context).colorScheme.primary,
+                          // color: Theme.of(context).colorScheme.onSurface,
                           child: Text(
                             (index + 1).toString(),
                             style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary),
+                                color: Theme.of(context).colorScheme.primary),
                           ),
                         );
                     }
