@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_nike_shopping/generated/assets.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +17,13 @@ class AuthScreen extends StatelessWidget {
 
     return Theme(
       data: theme.copyWith(
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(theme.colorScheme.onPrimary),
-            foregroundColor: MaterialStateProperty.all(theme.colorScheme.primary)
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(theme.colorScheme.onPrimary),
+                foregroundColor:
+                    MaterialStateProperty.all(theme.colorScheme.primary)),
           ),
-        ),
           colorScheme: theme.colorScheme
               .copyWith(onSurface: theme.colorScheme.onInverseSurface),
           scaffoldBackgroundColor: theme.colorScheme.inverseSurface,
@@ -44,7 +52,7 @@ class AuthScreen extends StatelessWidget {
                 height: 24,
               ),
               Text(
-                "خوش آمدید!",
+                isLogin ? "خوش آمدید!" : 'فرم ثبت نام',
                 style: theme.textTheme.titleLarge
                     ?.copyWith(color: theme.colorScheme.onInverseSurface),
               ),
@@ -52,7 +60,9 @@ class AuthScreen extends StatelessWidget {
                 height: 16,
               ),
               Text(
-                "لطفا وارد حساب کاربری خود شوید!",
+                isLogin
+                    ? "لطفا وارد حساب کاربری خود شوید!"
+                    : "اطلاعات ثبت نام را وارد نمایید",
                 style: TextStyle(color: theme.colorScheme.onInverseSurface),
               ),
               const SizedBox(
@@ -72,20 +82,38 @@ class AuthScreen extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              SizedBox(width: double.infinity, height: 36, child: ElevatedButton(onPressed: () {}, child: const Text('ورود'))),
-              Row(children: [
-                Text(
-                    'حساب کاربری ندارید؟',
-                  style: TextStyle(color: theme.colorScheme.onInverseSurface),
-                ),
-                TextButton(
-                  onPressed: () {  },
-                  child: Text('ثبت نام'),
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(theme.colorScheme.primaryContainer)
+              SizedBox(
+                  width: double.infinity,
+                  height: 36,
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text(
+                      isLogin?'ورود':'ثبت نام'
+                  ))),
+              SizedBox(
+                height: 16,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    isLogin?'حساب کاربری ندارید؟ ':'حساب کاربری دارید؟',
+                    style: TextStyle(color: theme.colorScheme.onInverseSurface),
                   ),
-                )
-              ],)
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isLogin = !isLogin;
+                      });
+                    },
+                    child: Text(
+                        isLogin?'ثبت نام':'ورود'
+                    ),
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                            theme.colorScheme.primaryContainer)),
+                  )
+                ],
+              )
             ],
           ),
         ),
